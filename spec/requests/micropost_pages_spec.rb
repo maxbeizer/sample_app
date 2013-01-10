@@ -42,4 +42,15 @@ describe "MicropostPages" do
       end
     end
   end
+
+  describe "micropost pagination" do
+    before do
+      50.times { FactoryGirl.create(:micropost, user: user) }
+      visit root_path
+    end
+
+    it "should only show 30 microposts" do
+      page.should have_selector("div.pagination")
+    end
+  end
 end

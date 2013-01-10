@@ -31,6 +31,18 @@ describe "StaticPages" do
           page.should have_selector("li##{item.id}", text: item.content)
         end
       end
+
+      it "should render the user's post count (plural)" do
+        page.should have_selector('span', text: "2 microposts")
+      end
+
+      describe "when there is only one micropost" do
+        before { click_link "delete" }
+
+        it "should render the user's post count (singular)" do
+          page.should have_selector('span', text: "1 micropost")
+        end
+      end
     end
   end
 
